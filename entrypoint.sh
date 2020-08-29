@@ -24,6 +24,18 @@ if [ -z "${DEPLOY_HOST+x}" ]; then
   errVarUnset 'DEPLOY_HOST'
 fi
 
+if [ -z "${GRAFANA_GITHUB_CLIENT_ID+x}" ]; then
+  errVarUnset 'GRAFANA_GITHUB_CLIENT_ID'
+fi
+
+if [ -z "${GRAFANA_GITHUB_CLIENT_SECRET+x}" ]; then
+  errVarUnset 'GRAFANA_GITHUB_CLIENT_SECRET'
+fi
+
+if [ -z "${GRAFANA_GITHUB_ORGANIZATIONS+x}" ]; then
+  errVarUnset 'GRAFANA_GITHUB_ORGANIZATIONS'
+fi
+
 if [ -z "${PRIMARY_HOSTNAME+x}" ]; then
   errVarUnset 'PRIMARY_HOSTNAME'
 fi
@@ -99,6 +111,9 @@ cat > "${ansible_extra_params}" <<EOF
   "admin_email": "${ADMIN_EMAIL}",
   "db_password": "${APP_DB_PASSWORD}",
   "db_super_password": "${SUPER_DB_PASSWORD}",
+  "grafana_github_client_id": "${GRAFANA_GITHUB_CLIENT_ID}",
+  "grafana_github_client_secret": "${GRAFANA_GITHUB_CLIENT_SECRET}",
+  "grafana_github_organizations": "${GRAFANA_GITHUB_ORGANIZATIONS}",
   "primary_hostname": "${PRIMARY_HOSTNAME}",
   "secret_key": "${SECRET_KEY}",
   "ssh_public_key": "${SSH_PUBLIC_KEY}",
