@@ -8,6 +8,10 @@ errVarUnset() {
   exit 1
 }
 
+if [ -z "${ADDITIONAL_HOSTNAMES+x}" ]; then
+    ADDITIONAL_HOSTNAMES='[]'
+fi
+
 if [ -z "${ADMIN_EMAIL+x}" ]; then
   errVarUnset 'ADMIN_EMAIL'
 fi
@@ -20,12 +24,12 @@ if [ -z "${DEPLOY_HOST+x}" ]; then
   errVarUnset 'DEPLOY_HOST'
 fi
 
-if [ -z "${SECRET_KEY+x}" ]; then
-  errVarUnset 'SECRET_KEY'
+if [ -z "${PRIMARY_HOSTNAME+x}" ]; then
+  errVarUnset 'PRIMARY_HOSTNAME'
 fi
 
-if [ -z "${SERVER_HOSTS+x}" ]; then
-  errVarUnset 'SERVER_HOSTS'
+if [ -z "${SECRET_KEY+x}" ]; then
+  errVarUnset 'SECRET_KEY'
 fi
 
 if [ -z "${SPACES_ACCESS_KEY_ID+x}" ]; then
@@ -91,11 +95,12 @@ echo "  - Wrote SSH private key to '${ansible_key_file}'"
 
 cat > "${ansible_extra_params}" <<EOF
 {
+  "additional_hostnames": ${ADDITIONAL_HOSTNAMES},
   "admin_email": "${ADMIN_EMAIL}",
   "db_password": "${APP_DB_PASSWORD}",
   "db_super_password": "${SUPER_DB_PASSWORD}",
+  "primary_hostname": "${PRIMARY_HOSTNAME}",
   "secret_key": "${SECRET_KEY}",
-  "server_hosts": ${SERVER_HOSTS},
   "ssh_public_key": "${SSH_PUBLIC_KEY}",
   "zeroed_books_version": "${ZEROED_BOOKS_VERSION}"
 }
