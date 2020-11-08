@@ -20,6 +20,14 @@ if [ -z "${APP_DB_PASSWORD+x}" ]; then
   errVarUnset 'APP_DB_PASSWORD'
 fi
 
+if [ -z "${DB_BACKUP_BUCKET+x}" ]; then
+  errVarUnset 'DB_BACKUP_BUCKET'
+fi
+
+if [ -z "${DB_BACKUP_REGION+x}" ]; then
+  errVarUnset 'DB_BACKUP_REGION'
+fi
+
 if [ -z "${DEPLOY_HOST+x}" ]; then
   errVarUnset 'DEPLOY_HOST'
 fi
@@ -117,6 +125,10 @@ cat > "${ansible_extra_params}" <<EOF
   "primary_hostname": "${PRIMARY_HOSTNAME}",
   "secret_key": "${SECRET_KEY}",
   "ssh_public_key": "${SSH_PUBLIC_KEY}",
+  "zeroed_books_db_backup_bucket": "${DB_BACKUP_BUCKET}",
+  "zeroed_books_db_backup_region": "${DB_BACKUP_REGION}",
+  "zeroed_books_spaces_access_key_id": "${SPACES_ACCESS_KEY_ID}",
+  "zeroed_books_spaces_secret_access_key": "${SPACES_SECRET_ACCESS_KEY}",
   "zeroed_books_version": "${ZEROED_BOOKS_VERSION}"
 }
 EOF
