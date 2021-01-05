@@ -32,6 +32,10 @@ if [ -z "${DEPLOY_HOST+x}" ]; then
   errVarUnset 'DEPLOY_HOST'
 fi
 
+if [ -z "${FROM_EMAIL_ADDRESS+x}" ]; then
+  errVarUnset 'FROM_EMAIL_ADDRESS'
+fi
+
 if [ -z "${GRAFANA_GITHUB_CLIENT_ID+x}" ]; then
   errVarUnset 'GRAFANA_GITHUB_CLIENT_ID'
 fi
@@ -50,6 +54,10 @@ fi
 
 if [ -z "${SECRET_KEY+x}" ]; then
   errVarUnset 'SECRET_KEY'
+fi
+
+if [ -z "${SENDGRID_API_KEY+x}" ]; then
+  errVarUnset 'SENDGRID_API_KEY'
 fi
 
 if [ -z "${SPACES_ACCESS_KEY_ID+x}" ]; then
@@ -119,11 +127,13 @@ cat > "${ansible_extra_params}" <<EOF
   "admin_email": "${ADMIN_EMAIL}",
   "db_password": "${APP_DB_PASSWORD}",
   "db_super_password": "${SUPER_DB_PASSWORD}",
+  "from_email_address": "${FROM_EMAIL_ADDRESS}",
   "grafana_github_client_id": "${GRAFANA_GITHUB_CLIENT_ID}",
   "grafana_github_client_secret": "${GRAFANA_GITHUB_CLIENT_SECRET}",
   "grafana_github_organizations": "${GRAFANA_GITHUB_ORGANIZATIONS}",
   "primary_hostname": "${PRIMARY_HOSTNAME}",
   "secret_key": "${SECRET_KEY}",
+  "sendgrid_api_key": "${SENDGRID_API_KEY}",
   "ssh_public_key": "${SSH_PUBLIC_KEY}",
   "zeroed_books_db_backup_bucket": "${DB_BACKUP_BUCKET}",
   "zeroed_books_db_backup_region": "${DB_BACKUP_REGION}",
